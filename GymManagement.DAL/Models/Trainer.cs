@@ -7,6 +7,6 @@ namespace GymManagement.DAL.Models
         //Note : HireDate =CreatedAt
         public Specialties  Specialties { get; set; }
 
-        public ICollection<Session> Sessions { get; set; }
+        public ICollection<Session> Sessions { get; set; }=new HashSet<Session>();
     }
 }

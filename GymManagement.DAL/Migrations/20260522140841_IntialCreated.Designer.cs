@@ -12,7 +12,7 @@ using Session01.Data;
 namespace GymManagement.DAL.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20260522135532_IntialCreated")]
+    [Migration("20260522140841_IntialCreated")]
     partial class IntialCreated
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace GymManagement.DAL.Migrations
                     b.Property<int>("MemberId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainerId")
+                    b.Property<int>("SessionId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdateAt")
@@ -55,7 +55,7 @@ namespace GymManagement.DAL.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.HasIndex("TrainerId");
+                    b.HasIndex("SessionId");
 
                     b.ToTable("Bookings");
                 });
@@ -411,15 +411,15 @@ namespace GymManagement.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GymManagement.DAL.Models.Trainer", "Trainer")
+                    b.HasOne("GymManagement.DAL.Models.Session", "Session")
                         .WithMany()
-                        .HasForeignKey("TrainerId")
+                        .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Member");
 
-                    b.Navigation("Trainer");
+                    b.Navigation("Session");
                 });
 
             modelBuilder.Entity("GymManagement.DAL.Models.HealthRecord", b =>
