@@ -15,7 +15,7 @@ namespace GymManagement.DAL.Models
         
 
         public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
-        public ICollection<MemberShip> MemberShips { get; set; } = new HashSet<MemberShip>();
+        public MemberShip MemberShip { get; set; } = default!;
 
     }
 }

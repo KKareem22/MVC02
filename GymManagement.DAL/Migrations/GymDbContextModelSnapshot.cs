@@ -239,7 +239,8 @@ namespace GymManagement.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex("MemberId")
+                        .IsUnique();
 
                     b.HasIndex("PlanId");
 
@@ -464,8 +465,8 @@ namespace GymManagement.DAL.Migrations
             modelBuilder.Entity("GymManagement.DAL.Models.MemberShip", b =>
                 {
                     b.HasOne("GymManagement.DAL.Models.Member", "Member")
-                        .WithMany("MemberShips")
-                        .HasForeignKey("MemberId")
+                        .WithOne("MemberShip")
+                        .HasForeignKey("GymManagement.DAL.Models.MemberShip", "MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -543,7 +544,8 @@ namespace GymManagement.DAL.Migrations
                     b.Navigation("HealthRecord")
                         .IsRequired();
 
-                    b.Navigation("MemberShips");
+                    b.Navigation("MemberShip")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GymManagement.DAL.Models.Trainer", b =>

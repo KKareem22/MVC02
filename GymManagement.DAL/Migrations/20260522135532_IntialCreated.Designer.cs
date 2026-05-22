@@ -12,8 +12,8 @@ using Session01.Data;
 namespace GymManagement.DAL.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20260518160350_Intial Create")]
-    partial class IntialCreate
+    [Migration("20260522135532_IntialCreated")]
+    partial class IntialCreated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -242,7 +242,8 @@ namespace GymManagement.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex("MemberId")
+                        .IsUnique();
 
                     b.HasIndex("PlanId");
 
@@ -467,8 +468,8 @@ namespace GymManagement.DAL.Migrations
             modelBuilder.Entity("GymManagement.DAL.Models.MemberShip", b =>
                 {
                     b.HasOne("GymManagement.DAL.Models.Member", "Member")
-                        .WithMany("MemberShips")
-                        .HasForeignKey("MemberId")
+                        .WithOne("MemberShip")
+                        .HasForeignKey("GymManagement.DAL.Models.MemberShip", "MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -546,7 +547,8 @@ namespace GymManagement.DAL.Migrations
                     b.Navigation("HealthRecord")
                         .IsRequired();
 
-                    b.Navigation("MemberShips");
+                    b.Navigation("MemberShip")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GymManagement.DAL.Models.Trainer", b =>
